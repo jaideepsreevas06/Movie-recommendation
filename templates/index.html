@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Movie Recommendation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #4a4aec;
+      margin-bottom: 30px;
+    }
+
+    form {
+      margin-bottom: 40px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 16px;
+      width: 280px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+      background-color: #4a4aec;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #3a3ad1;
+    }
+
+    .movie-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .movie-card {
+      width: 160px;
+      text-align: center;
+    }
+
+    .movie-card img {
+      width: 150px;
+      height: 225px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .movie-card strong {
+      display: block;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 480px) {
+      select {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Movie Recommendation</h1>
+  
+  <form method="POST">
+    <label for="movie_select">Select a Movie:</label>
+    <select name="movie_select" id="movie_select">
+      {% for movie in movie_list %}
+        <option value="{{ movie }}" {% if movie == selected_movie %}selected{% endif %}>{{ movie }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Get Recommendations</button>
+  </form>
+
+  {% if combined %}
+    <h2>Recommendations for "{{ selected_movie }}":</h2>
+    <div class="movie-grid">
+      {% for rec, poster in combined %}
+        <div class="movie-card">
+          <img src="{{ poster }}" alt="{{ rec }}">
+          <strong>{{ rec }}</strong>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</body>
+</html>

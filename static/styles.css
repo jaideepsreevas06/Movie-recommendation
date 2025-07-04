@@ -1,0 +1,30 @@
+h1,p {
+  font-style: fantasy;
+  text-align: center;
+  margin: 1em auto;
+}
+label {
+  display: block;
+  margin: 0.5rem 0;
+}
+body {
+  background-color: #4a4aec;
+  color: #f4f5f6
+}
+input,textarea {
+  width: 100%;
+  margin: 10px 0 0 0;
+  min-height: 2em;
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    background-image: linear-gradient(115deg,rgba(5, 5, 27, 0.8),rgba(3, 3, 34, 0.7)), url(https://user-images.githubusercontent.com/33485020/108069438-5ee79d80-7089-11eb-8264-08fdda7e0d11.jpg);
+    background-size: cover;
+    background-position: center;
+}
